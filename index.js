@@ -38,7 +38,38 @@ const findSome = async (name) => {
     process.exit();
 };
 
+const updateOne = async (name, newName) => {
+    const friend = await Friend.updateOne({name: name}, {name: newName});
+    console.log(friend);
+    process.exit();
+};
+
+const updateMany = async (name, newName) => {
+    const friend = await Friend.updateMany({name: name}, {name: newName});
+    console.log(friend)
+    process.exit();
+};
+
+const deleteOne = async (name) => {
+    const friend = await Friend.deleteOne({name: name});
+    console.log(friend);
+    process.exit();
+};
+
+const deleteMany = async (name) => {
+    const friend = await Friend.deleteMany({name: name});
+    console.log(friend);
+    process.exit();
+};
+
+const deleteAll = async () => {
+    const friend = await Friend.deleteMany();
+    console.log(friend);
+    process.exit();
+};
+
 const main = async (argv) => {
+    
     try {
         if (argv.add) {
             await add(argv.name);
@@ -48,6 +79,16 @@ const main = async (argv) => {
             await findAll();
         } else if (argv.findSome) {
             await findSome(argv.name)
+        } else if (argv.updateOne) {
+            await updateOne(argv.name, argv.newName);
+        } else if (argv.updateMany) {
+            await updateMany(argv.name, argv.newName);
+        } else if (argv.deleteOne) {
+            await deleteOne(argv.name);
+        } else if (argv.deleteMany) {
+            await deleteMany(argv.name);
+        } else if (argv.deleteAll) {
+            await deleteAll();
         }
     } catch (error) {
         console.log(error);
